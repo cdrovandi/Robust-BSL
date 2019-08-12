@@ -66,8 +66,8 @@ acc_rate_RbslM = mean(diff(thetaRM(:,1))~=0);
 acc_rate_bsl = mean(diff(theta(:,1))~=0);
 
 
-%% Thining the samples by taking every tenth observations %%
-
+% %% Thining the samples by taking every tenth observations %%
+% 
 Burn = 10000; % Burn-in period for the MCMC sampler
 thin = 10; % Thinning rate for the chain
 
@@ -90,10 +90,10 @@ Theta = theta(Burn:end,:);
 Thin_Theta = Theta(seq,:);
 % Acceptance rate for thinned BSL draws
 Thin_acc_rate_bsl= mean(diff(Thin_Theta(:,1))~=0);
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Kernel densities for the different parameters 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % Kernel densities for the different parameters 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 [f1,x1]=ksdensity(Thin_Theta(:,1));
 [f2,x2]=ksdensity(Thin_Theta(:,2));
 [fm1,xm1]=ksdensity(Thin_ThetaM(:,1));
@@ -106,30 +106,30 @@ subplot(1,2,1)
 plot(x1,f1,'blue',xv1,fv1,'black',xm1,fm1,'green')
 subplot(1,2,2)
 plot(x2,f2,'blue',xv2,fv2,'black',xm2,fm2,'green')
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Computing kernel densities for the different adjustment terms 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-[g1,xg1]=ksdensity(gamma(seq,1));
-[g2,xg2]=ksdensity(gamma(seq,2));
-[g3,xg3]=ksdensity(gamma(seq,3));
-[e1,xe1]=ksdensity(epsilon(seq,1),'support','positive');
-[e2,xe2]=ksdensity(epsilon(seq,2),'support','positive');
-[e3,xe3]=ksdensity(epsilon(seq,3),'support','positive');
-%% Plotting The Adjustments terms  
-subplot(2,3,1)
-plot(xg1,g1)
-subplot(2,3,2)
-plot(xg2,g2)
-subplot(2,3,3)
-plot(xg3,g3)
-subplot(2,3,4)
-plot(xe1,e1)
-subplot(2,3,5)
-plot(xe2,e2)
-subplot(2,3,6)
-plot(xe3,e3)
+% 
+% 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% % Computing kernel densities for the different adjustment terms 
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% [g1,xg1]=ksdensity(gamma(seq,1));
+% [g2,xg2]=ksdensity(gamma(seq,2));
+% [g3,xg3]=ksdensity(gamma(seq,3));
+% [e1,xe1]=ksdensity(epsilon(seq,1),'support','positive');
+% [e2,xe2]=ksdensity(epsilon(seq,2),'support','positive');
+% [e3,xe3]=ksdensity(epsilon(seq,3),'support','positive');
+% %% Plotting The Adjustments terms  
+% subplot(2,3,1)
+% plot(xg1,g1)
+% subplot(2,3,2)
+% plot(xg2,g2)
+% subplot(2,3,3)
+% plot(xg3,g3)
+% subplot(2,3,4)
+% plot(xe1,e1)
+% subplot(2,3,5)
+% plot(xe2,e2)
+% subplot(2,3,6)
+% plot(xe3,e3)
 
 
 

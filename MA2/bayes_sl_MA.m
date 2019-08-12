@@ -61,8 +61,19 @@ logdetA = 2*sum(log(diag(L)));
 loglike_ind_curr = - 0.5*(ssy-the_mean)/the_cov*(ssy-the_mean)';
 
 for i = 1:M
-    
+
+ t_all = 0;   
+while (t_all<3)    
+   
     theta_prop =mvnrnd(theta_curr,[.01 -.0;-.0 .01]); %Proposing a new pair of parameters
+
+    % Rejecting proposed draws if they are outside the parameter space
+    t1 = (abs(theta_prop(1))<2);
+    t2 = (theta_prop(1)+theta_prop(2)>-1);
+    t3 = (theta_prop(1)-theta_prop(2)<1);
+    
+ t_all = t1+t2+t3;
+end    
 
 %simulating n data sets using the proposed parameters
 nu = randn(samSize+100,n);
@@ -94,7 +105,7 @@ loglike_ind_prop = - 0.5*(ssy-the_mean)/the_cov*(ssy-the_mean)';
     if (exp(loglike_ind_prop - loglike_ind_curr) > rand)
         %fprintf('*** accept ***\n');
         theta_curr = theta_prop;
-        loglike_ind_curr = loglike_ind_prop;
+        loglike_ind_curr = loglike_ind_prop;    
     end
  i   
 % store current values of the chain

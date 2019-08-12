@@ -127,9 +127,19 @@ for i = 1:M
         end
         
     end
-    %Proposing a new pair of parameters
-    theta_prop =mvnrnd(theta_curr,[.1 -.0;-.0 .1]); 
+    
+t_all = 0;
+while (t_all<3)    
+   
+    theta_prop =mvnrnd(theta_curr,[.01 -.0;-.0 .01]); %Proposing a new pair of parameters
 
+    % Rejecting proposed draws if they are outside the parameter space
+    t1 = (abs(theta_prop(1))<2);
+    t2 = (theta_prop(1)+theta_prop(2)>-1);
+    t3 = (theta_prop(1)-theta_prop(2)<1);
+    
+ t_all = t1+t2+t3;
+end 
     %simulating n data sets using the proposed parameters
     nu = randn(samSize,n);
 
