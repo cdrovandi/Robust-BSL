@@ -1,5 +1,5 @@
 # Robust-BSL
-Implementation of the robust Bayesian synthetic likelihood methods of https://arxiv.org/abs/1904.04551 for the MA(2) and Toad movement examples. 
+Implementation of the robust Bayesian synthetic likelihood methods of https://arxiv.org/abs/1904.04551 for the MA(2), normal and Toad movement examples. 
 
 There is a separate folder for each example.
 
